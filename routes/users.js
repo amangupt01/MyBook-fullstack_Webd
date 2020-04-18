@@ -36,7 +36,7 @@ router.post('/register',function(req,res){
 			name:name,
 			email:email,
 			username:username,
-			password:password
+			password:password,
 		})
 		bcrypt.genSalt(10,function(err,salt){
 			bcrypt.hash(newUser.password,salt,function(err,hash){
@@ -84,7 +84,7 @@ router.get('/logout',function(req,res){
 	req.logout();
 	req.session.message = {
 		type : 'success',
-		intro : 'Your are logged out',
+		intro : 'You are logged out',
 		message : 'Yes'
 		};
 	res.redirect('/users/login');

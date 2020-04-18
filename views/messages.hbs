@@ -1,0 +1,9 @@
+{{#if expressFlash}}
+    <p><strong>FLASH!</strong> {{ expressFlash }}</p>
+{{/if}}
+
+{{#if sessionFlash.message}}
+    <div class="{{ sessionFlash.type }}">
+        <strong>FLASH!</strong> {{ sessionFlash.message }}
+    </div>
+{{/if}}

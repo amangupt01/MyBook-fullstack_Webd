@@ -3,6 +3,8 @@
 <h2> {{article.author}}</h2>
 <h3> {{article.body}}</h3>
 <hr>
+{{#if user}}
 <a class="btn btn-default" href="/articles/edit/{{article._id}}">Edit </a>
 <a class="btn btn-danger delete-article" href="#" data-id = {{article._id}}>Delete </a>
+{{/if}}
 <hr>

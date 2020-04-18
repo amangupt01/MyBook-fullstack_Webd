@@ -19,6 +19,7 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.17.1",
     "express-validator": "^5.3.1",
+    "handlebars-helpers": "^0.10.0",
     "handlebars-layouts": "^3.1.4",
     "jquery": "^3.5.0",
     "mongoose": "^5.9.9",

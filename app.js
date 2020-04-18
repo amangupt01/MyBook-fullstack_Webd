@@ -11,7 +11,8 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const router = express.Router()
 const config = require('./config/database');
-const passport = require('passport')
+const passport = require('passport');
+
 
 mongoose.connect(config.database,{ useNewUrlParser: true,useUnifiedTopology: true});
 let db = mongoose.connection;
@@ -46,11 +47,13 @@ app.use(expressValidator({
   }
 }));
 
+
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
 
+//
 
 app.get('*',function(req,res,next){
 	res.locals.user = req.user || null ;
@@ -59,15 +62,24 @@ app.get('*',function(req,res,next){
 
 
 
-
-
 let Article = require('./models/article')
 
-app.set('view engine', 'hbs');
-app.engine('hbs', handlebars({
-layoutsDir: __dirname + '/views/layouts',
-extname : 'hbs'
-}));
+const hbs = handlebars.create({
+	layoutsDir: __dirname + '/views/layouts',
+	extname : 'hbs',
+
+	helpers:{
+		ifeq: function (a, b, options) {
+    		if (a == b) { return options.fn(this); }
+    		return options.inverse(this);
+		}
+	}
+});
+
+app.set('view engine', 'hbs'); 
+app.engine('hbs', hbs.engine);
+
+
 app.use(bodyParser.urlencoded({extended : false }));
 app.use(bodyParser.json());
 

@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router()
 
 let Article = require('../models/article')
+let User = require('../models/user');
 
 
 
-
-router.get('/edit/:id',function(req,res){
+router.get('/edit/:id',ensureauthentication,function(req,res){
 	Article.findById(req.params.id).lean()
 		.exec(function(err,articles){
 		if(err){
@@ -17,7 +17,7 @@ router.get('/edit/:id',function(req,res){
 	});
 });		
 
-router.get('/add',function(req,res){
+router.get('/add',ensureauthentication,function(req,res){
 	res.render('articles_add', {title : 'Add Article'});
 });
 
@@ -25,7 +25,7 @@ router.get('/add',function(req,res){
 
 router.post('/add',function(req,res){
 	req.checkBody('title','Title is required').notEmpty();
-	req.checkBody('author','Author is required').notEmpty();
+	//req.checkBody('author','Author is required').notEmpty();
 	req.checkBody('body','Body is required').notEmpty()
 
 	let errors =req.validationErrors();
@@ -35,8 +35,9 @@ router.post('/add',function(req,res){
 	else{
 		let article = new Article() ;
 		article.title = req.body.title;
-		article.author = req.body.author;
-		article.body = req.body.body
+		article.author = req.user.name;
+		article.body = req.body.body;
+		article.userId = req.user.username;
 
 		article.save(function(err){
 			if(err){
@@ -84,7 +85,6 @@ router.post('/edit/:id',function(req,res){
 
 router.delete('/:id',function(req,res){
 	let query = {_id:req.params.id}
-
 	Article.deleteOne(query,function(err){
 			if(err){
 			console.log(err);
@@ -96,14 +96,30 @@ router.delete('/:id',function(req,res){
 router.get('/:id',function(req,res){
 	Article.findById(req.params.id).lean()
 		.exec(function(err,articles){
-		if(err){
-			console.log(err)
-			res.send("Error 404 : Not Found")
-		}else{
-			res.render('articles', {article : articles});
-		}
-	});
+			if(err){
+				console.log(err)
+				res.send("Error 404 : Not Found")
+			}else{ 
+				res.render('articles', {article : articles});
+			}
+		});
 });
+
+
+
+function ensureauthentication(req,res,next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		req.session.message = {
+				type : 'danger',
+				intro : 'Please login to add articles',
+				message : 'Yes'
+		}
+		res.redirect('/users/login');
+	}
+
+}
 
 
 module.exports = router ;

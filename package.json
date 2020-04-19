@@ -9,6 +9,7 @@
   "author": "Aman Gupta",
   "license": "ISC",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^3.4.1",
@@ -27,6 +28,6 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "handlebars": "^4.5.0"
+    "handlebars": "^4.7.6"
   }
 }

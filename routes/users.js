@@ -5,6 +5,7 @@ const passport = require('passport')
 const flash = require('connect-flash')
 
 let User = require('../models/user');
+let Article = require('../models/article')
 
 router.get('/register',function(req,res){
 	res.render('register');
@@ -89,6 +90,19 @@ router.get('/logout',function(req,res){
 		};
 	res.redirect('/users/login');
 
-})
+});
+
+router.get('/:id',function(req,res){
+	Article.find({userId : req.params.id}).lean()
+		.exec(function(err,articles){
+			if(err){
+				console.log(err)
+				res.send("Error 404 : Not Found")
+			}else{ 
+				console.log()
+				res.render('user_homepage', {article : articles});
+			}
+		});
+});
 
 module.exports = router ;

@@ -12,7 +12,8 @@ const cookieParser = require('cookie-parser');
 const router = express.Router()
 const config = require('./config/database');
 const passport = require('passport');
-
+const Handlebars = require('handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 mongoose.connect(config.database,{ useNewUrlParser: true,useUnifiedTopology: true});
 let db = mongoose.connection;
@@ -67,12 +68,25 @@ let Article = require('./models/article')
 const hbs = handlebars.create({
 	layoutsDir: __dirname + '/views/layouts',
 	extname : 'hbs',
+	handlebars: allowInsecurePrototypeAccess(Handlebars),
 
 	helpers:{
-		ifeq: function (a, b, options) {
-    		if (a == b) { return options.fn(this); }
-    		return options.inverse(this);
-		}
+		iff: function(a, operator, b, opts) {
+    		var bool = false;
+    		switch(operator) {
+       			case '==':
+           		bool = a === b;
+           		break;
+       		case '>':
+           		bool = a > b;
+           		break;
+       		case '<':
+           		bool = a < b;
+           		break;
+       		default:
+           		throw "Unknown operator " + operator;
+           	}	
+    	}
 	}
 });
 

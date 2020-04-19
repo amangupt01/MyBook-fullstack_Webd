@@ -7,6 +7,16 @@ let User = require('../models/user');
 
 
 router.get('/edit/:id',ensureauthentication,function(req,res){
+	console.log(req.params.id,req.body.userId)
+	if(req.params.id != req.body.userId ){
+		req.session.message = {
+				type : 'danger',
+				intro : 'You cannot edit articles of other author',
+				message : 'Yes'
+		}
+		res.redirect('/');
+		return;
+	}
 	Article.findById(req.params.id).lean()
 		.exec(function(err,articles){
 		if(err){
@@ -37,7 +47,7 @@ router.post('/add',function(req,res){
 		article.title = req.body.title;
 		article.author = req.user.name;
 		article.body = req.body.body;
-		article.userId = req.user.username;
+		article.userId = req.user._id;
 
 		article.save(function(err){
 			if(err){
@@ -61,9 +71,7 @@ router.post('/add',function(req,res){
 router.post('/edit/:id',function(req,res){
 	let article =  {};
 	article.title = req.body.title;
-	article.author = req.body.author;
-	article.body = req.body.body
-
+	//article.author = req.body.author;
 	let query = {_id:req.params.id};
 
 	Article.updateOne(query,article,function(err){
@@ -104,6 +112,7 @@ router.get('/:id',function(req,res){
 			}
 		});
 });
+
 
 
 

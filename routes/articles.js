@@ -7,16 +7,6 @@ let User = require('../models/user');
 
 
 router.get('/edit/:id',ensureauthentication,function(req,res){
-	console.log(req.params.id,req.body.userId)
-	if(req.params.id != req.body.userId ){
-		req.session.message = {
-				type : 'danger',
-				intro : 'You cannot edit articles of other author',
-				message : 'Yes'
-		}
-		res.redirect('/');
-		return;
-	}
 	Article.findById(req.params.id).lean()
 		.exec(function(err,articles){
 		if(err){
@@ -108,11 +98,22 @@ router.get('/:id',function(req,res){
 				console.log(err)
 				res.send("Error 404 : Not Found")
 			}else{ 
-				res.render('articles', {article : articles});
+				res.render('article_for_everyone', {article : articles});
 			}
 		});
 });
 
+router.get('/real/:id',function(req,res){
+	Article.findById(req.params.id).lean()
+		.exec(function(err,articles){
+			if(err){
+				console.log(err)
+				res.send("Error 404 : Not Found")
+			}else{ 
+				res.render('articles', {article : articles});
+			}
+		});
+});
 
 
 

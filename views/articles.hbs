@@ -1,10 +1,40 @@
+<body class="is-preload">
+	<div id="page-wrapper">
+        <header id="header">
+          <h1><a href="/">Mybook</a> by Aman Gupta</h1>
+          <nav id="nav">
+            <ul>
+              {{#if user}}
+                <li><a href="/users/{{user._id}}">Homepage</a></li>
+                <li><a href="/articles/add">Add Article</a></li>
+              {{/if}}
+              {{#if user}}
+                <li><a href="/users/logout">Logout</a></li>
+              {{else}}
+                <li><a href="/users/login">Login</a></li>
+                <li><a href="/users/register",class="button">Sign up</a></li>
+              {{/if}}
+            </ul>
+          </nav>
+        </header>
 
-<h1> {{article.title}}</h1>
-<h2>Written By  {{article.author}}</h2>
-<h3> {{article.body}}</h3>
-<hr>
-{{#if user}}
-<a class="btn btn-default" href="/articles/edit/{{article._id}}">Edit </a>
-<a class="btn btn-danger delete-article" href="#" data-id = {{article._id}}>Delete </a>
-{{/if}}
-<hr>
+    <section id="main" class="container">
+    	
+		<header>
+			<h2>{{article.title}}</h2>
+			<p>Written by <b>{{article.author}}</b>.</p>
+		</header>
+		<div class="box">
+			{{article.body}}
+		</div>
+
+		<ul class="actions special">
+		{{#if user}}
+			<a class="btn btn-default" href="/articles/edit/{{article._id}}">Edit </a>
+			<a class="btn btn-danger delete-article" href="#" data-id = {{article._id}}>Delete </a>
+		{{/if}}
+		</ul>
+	<section>
+
+	</div>
+</body>

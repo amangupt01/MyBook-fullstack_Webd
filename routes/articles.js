@@ -81,7 +81,7 @@ router.post('/edit/:id',function(req,res){
 	});
 });
 
-router.delete('/:id',function(req,res){
+router.delete('/real/:id',function(req,res){
 	let query = {_id:req.params.id}
 	Article.deleteOne(query,function(err){
 			if(err){
@@ -104,7 +104,8 @@ router.get('/:id',function(req,res){
 });
 
 router.get('/real/:id',function(req,res){
-	Article.findById(req.params.id).lean()
+
+	Article.findById(req.params.id+'').lean()
 		.exec(function(err,articles){
 			if(err){
 				console.log(err)

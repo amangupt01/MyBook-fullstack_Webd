@@ -1,6 +1,55 @@
-<h1>Your Articles:</h1>
-<ul class="list-group">
-  {{#each article}}
-    <li class="list-group-item"><a href="/articles/real/{{this._id}}">{{this.title}}</li>
-  {{/each}}
-</ul>
+<body class="landing is-preload">
+		<div id="page-wrapper">
+
+        <header id="header" class="alt">
+          <h1><a href="/">Mybook</a> by Aman Gupta</h1>
+          <nav id="nav">
+            <ul>
+              {{#if user}}
+                <li><a href="/users/{{user._id}}">Homepage</a></li>
+                <li><a href="/articles/add">Add Article</a></li>
+              {{/if}}
+              {{#if user}}
+                <li><a href="/users/logout">Logout</a></li>
+              {{else}}
+                <li><a href="/users/login">Login</a></li>
+                <li><a href="/users/register",class="button">Sign up</a></li>
+              {{/if}}
+            </ul>
+          </nav>
+        </header>
+
+
+
+
+
+
+<section id="banner">
+	<h2>Alpha</h2>
+	{{#if user}}
+	<p>These are the articles written by you,you can edit/delete these by clicking on the respective article. </p>
+	{{else}}
+	<p>All articles by the authors of Mybook, Sign up to create and write your own articles</p>
+	<ul class="actions special">
+		<li><a href="/users/register" class="button primary">Sign Up</a></li>
+	</ul>
+	{{/if}}
+</section>
+
+
+
+<section id="main" class="container">
+
+	<section class="box special">
+		<header class="major">
+			<ul class="list-group">
+			  {{#each article}}
+			    <li class="list-group-item"><a href="/articles/real/{{this._id}}">{{this.title}}</li>
+			  {{/each}}
+			</ul>
+		</header>
+	</section>
+</div>
+</body>
+
+

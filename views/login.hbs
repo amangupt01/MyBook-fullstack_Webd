@@ -1,9 +1,68 @@
-<div id="myDiv">
-<form id="Form" action="/users/login" method="POST">
-	  <label >Username:</label><br>
-	  <input class="form-control" type="text" name="username" ><br>
-	  <label >Password:</label><br>
-	  <input class="form-control" type="password" name="password" ><br>
-	  <button type="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
-</form>
+<body class="is-preload">
+	<div id="page-wrapper">
+
+		<header id="header" >
+        	<h1><a href="/">Mybook</a> by Aman Gupta</h1>
+          		<nav id="nav">
+		            <ul>
+		              {{#if user}}
+		                <li><a href="/users/{{user._id}}">Homepage</a></li>
+		                <li><a href="/articles/add">Add Article</a></li>
+		              {{/if}}
+		              {{#if user}}
+		                <li><a href="/users/logout">Logout</a></li>
+		              {{else}}
+		                <li><a href="/users/login">Login</a></li>
+		                <li><a href="/users/register",class="button">Sign up</a></li>
+		              {{/if}}
+		            </ul>
+         		</nav>
+        </header>
+
+
+        <hr>
+
+        {{#if message}}
+    		<div class="container">
+    			<div style="text-align : center" class="alert alert-{{message.type}}">
+      				<button type ="button" class="close" data-dismiss ="alert">&times;</button>
+      				<strong>{{message.intro}}</strong>
+    			</div>
+  			</div>
+    	{{/if}}
+		{{#if errors}}
+    		<div class="container">
+      	{{#each errors}}
+    		<div style = "text-align : center" class="alert alert-danger">
+      			<button type ="button" class="close" data-dismiss ="alert">&times;</button>
+      			<strong>{{this.msg}}</strong>
+    		</div>
+    	{{/each}}
+  			</div>
+    	{{/if}}
+
+		<section id="main" class="container medium" >
+			<header>
+				<h2>Login</h2>
+			</header>
+				<div class="box">
+					<form method="POST" action="/users/login">
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-12">
+								<input type="text" name="username" id="username"  placeholder="Username" />
+							</div>
+							<div class="col-12">
+								<input type="password" name="password" id="password" placeholder="Password" />
+							</div>
+							<div class="col-12">
+								<ul class="actions special">
+									<li><input type="submit" value="Login" /></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+		</section>
+
 </div>
+</body>

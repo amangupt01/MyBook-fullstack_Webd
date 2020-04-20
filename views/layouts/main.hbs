@@ -4,68 +4,26 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />  
     <title>MyBook</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover,user-scalable=no" />
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
     <body>
-          <nav class="navbar navbar-inverse ">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">MyBook</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            {{#if user}}
-            <li><a href="/users/{{user._id}}">Homepage</a></li>
-            <li><a href="/articles/add">Add Article</a></li>
-            {{/if}}
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-          {{#if user}}
-           <li><a href="/users/logout">Logout</a></li>
-          {{else}}
-            <li><a href="/users/register">Register</a></li>
-            <li><a href="/users/login">Login</a></li>
-          {{/if}}
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    {{#if message}}
-    <div class="container">
-    <div style="text-align : center" class="alert alert-{{message.type}}">
-      <button type ="button" class="close" data-dismiss ="alert">&times;</button>
-      <strong>{{message.intro}}</strong>
-    </div>
-  </div>
-    {{/if}}
-
-    {{#if errors}}
-    <div class="container">
-      {{#each errors}}
-    <div style = "text-align : center" class="alert alert-danger">
-      <button type ="button" class="close" data-dismiss ="alert">&times;</button>
-      <strong>{{this.msg}}</strong>
-    </div>
-    {{/each}}
-  </div>
-    
-    {{/if}}
-
-      <div class="container">
-      <h1>{{ title }}</h1>
+    <div >
       {{{body}}}
     </div>
     </body>
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/js/main.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.dropotron.min.js"></script>
+<script src="/assets/js/jquery.scrollex.min.js"></script>
+<script src="/assets/js/browser.min.js"></script>
+<script src="/assets/js/breakpoints.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+
 </html>

@@ -45,7 +45,7 @@
 		<section id="main" class="container medium" >
 			<header>
 				<h2>Edit your article</h2>
-				<p>Click Submit to repost the edited article.</p>
+				<p>.</p>
 			</header>
 				<div class="box">
 					<form method="POST" action="/articles/edit/{{article._id}}">
@@ -70,3 +70,15 @@
 </body>
 
 
+
+
+
+<div id="myDiv">
+<form id="Form" action="/articles/edit/{{article._id}}" method="POST">
+	  <label >Title :</label><br>
+	  <input class="form-control" type="text" name="title" value="{{article.title}}"><br>
+	  <label >Body :</label><br>
+	  <textarea class  ="form-control" type="text" name="body" >{{article.body}}</textarea><br><br>
+	  <button type="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
+</form>
+</div>

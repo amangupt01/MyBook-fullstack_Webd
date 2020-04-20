@@ -62,6 +62,7 @@ router.post('/edit/:id',function(req,res){
 	let article =  {};
 	article.title = req.body.title;
 	//article.author = req.body.author;
+	article.body = req.body.body;
 	let query = {_id:req.params.id};
 
 	Article.updateOne(query,article,function(err){

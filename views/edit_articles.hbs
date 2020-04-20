@@ -1,9 +1,72 @@
-<div id="myDiv">
-<form id="Form" action="/articles/edit/{{article._id}}" method="POST">
-	  <label >Title :</label><br>
-	  <input class="form-control" type="text" name="title" value="{{article.title}}"><br>
-	  <label >Body :</label><br>
-	  <textarea class  ="form-control" type="text" name="body" >{{article.body}}</textarea><br><br>
-	  <button type="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
-</form>
+
+<body class="is-preload">
+	<div id="page-wrapper">
+
+		<header id="header" >
+        	<h1><a href="/">Mybook</a> by Aman Gupta</h1>
+          		<nav id="nav">
+		            <ul>
+		              {{#if user}}
+		                <li><a href="/users/{{user._id}}">Homepage</a></li>
+		                <li><a href="/articles/add">Add Article</a></li>
+		              {{/if}}
+		              {{#if user}}
+		                <li><a href="/users/logout">Logout</a></li>
+		              {{else}}
+		                <li><a href="/users/login">Login</a></li>
+		                <li><a href="/users/register",class="button">Sign up</a></li>
+		              {{/if}}
+		            </ul>
+         		</nav>
+        </header>
+
+
+        <hr>
+
+        {{#if message}}
+    		<div class="container">
+    			<div style="text-align : center" class="alert alert-{{message.type}}">
+      				<button type ="button" class="close" data-dismiss ="alert">&times;</button>
+      				<strong>{{message.intro}}</strong>
+    			</div>
+  			</div>
+    	{{/if}}
+		{{#if errors}}
+    		<div class="container">
+      	{{#each errors}}
+    		<div style = "text-align : center" class="alert alert-danger">
+      			<button type ="button" class="close" data-dismiss ="alert">&times;</button>
+      			<strong>{{this.msg}}</strong>
+    		</div>
+    	{{/each}}
+  			</div>
+    	{{/if}}
+
+		<section id="main" class="container medium" >
+			<header>
+				<h2>Edit your article</h2>
+				<p>Click Submit to repost the edited article.</p>
+			</header>
+				<div class="box">
+					<form method="POST" action="/articles/edit/{{article._id}}">
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-12">
+								<input type="text" name="title" id="title"  value="{{article.title}}" />
+							</div>
+							<div class="col-12">
+								<textarea name="body" id="body" type ="text" rows= "12" >{{article.body}}</textarea>
+							</div>
+							<div class="col-12">
+								<ul class="actions special">
+									<li><input type="submit" value="Submit" /></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+		</section>
+
 </div>
+</body>
+
+

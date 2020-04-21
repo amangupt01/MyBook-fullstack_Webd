@@ -1,4 +1,4 @@
 module.exports = {
-	database:'mongodb://localhost:27017/mybookdb',
+	database:'mongodb+srv://Aman279:yXvT667Vx7Lh2GQA@mybookdb-wezbl.gcp.mongodb.net/test?retryWrites=true&w=majority',
 	secret : 'Anystring'
 }

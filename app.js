@@ -127,6 +127,9 @@ let users = require('./routes/users');
 app.use('/articles',articles);
 app.use('/users',users);
 
-app.listen(3000,function(){
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT,function(){
 	console.log('Server Started')
 }) 

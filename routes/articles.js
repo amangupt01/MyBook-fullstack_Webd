@@ -11,7 +11,18 @@ router.get('/edit/:id',ensureauthentication,function(req,res){
 		.exec(function(err,articles){
 		if(err){
 			res.send("Error 404 : Not Found")
-		}else{
+		}
+		console.log(articles.userId,req.user.id)
+		if (articles.userId != req.user.id){
+			req.session.message = {
+					type : 'danger',
+					intro : "You cannot edit someone else's articles" ,
+					message : 'Yes'
+				}
+			res.redirect('/')
+			return;
+		}
+		else{
 			res.render('edit_articles', {title: "Edit article" ,article : articles});
 		}
 	});
@@ -111,7 +122,17 @@ router.get('/real/:id',function(req,res){
 			if(err){
 				console.log(err)
 				res.send("Error 404 : Not Found")
-			}else{ 
+			}
+			if (articles.userId != req.user.id){
+				req.session.message = {
+						type : 'danger',
+						intro : "You cannot edit/delete someone else's articles" ,
+						message : 'Yes'
+					}
+				res.redirect('/')
+				return;
+			}
+			else{ 
 				res.render('articles', {article : articles});
 			}
 		});

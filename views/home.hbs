@@ -19,11 +19,6 @@
           </nav>
         </header>
 
-
-
-
-
-
 <section id="banner">
 	<h2>Alpha</h2>
 	{{#if user}}
@@ -38,7 +33,28 @@
 
 
 
+
+
 <section id="main" class="container">
+	                {{#if message}}
+    		<div class="container">
+    			<div style="text-align : center" class="alert alert-{{message.type}}">
+      				<button type ="button" class="close" data-dismiss ="alert">&times;</button>
+      				<strong>{{message.intro}}</strong>
+    			</div>
+  			</div>
+    	{{/if}}
+		{{#if errors}}
+    		<div class="container">
+      	{{#each errors}}
+    		<div style = "text-align : center" class="alert alert-danger">
+      			<button type ="button" class="close" data-dismiss ="alert">&times;</button>
+      			<strong>{{this.msg}}</strong>
+    		</div>
+    	{{/each}}
+  			</div>
+    	{{/if}}
+
 
 	<section class="box special">
 		<p><b><strong>All articles by the authors of Mybook</strong><b></p>

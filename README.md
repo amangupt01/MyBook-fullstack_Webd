@@ -42,6 +42,6 @@ Mybook is an online portal where user can register and login to add their own ar
 **Step-4** Make an online cluster in mongoDb Atlas and also create a user .   
 **Step-5** Modify the database.js in cofig folder by changing the database attribute by   
 ``` database : database:'mongodb+srv://<username>:<password>@mybookdb-wezbl.gcp.mongodb.net/test?retryWrites=true&w=majority',```  
-**Step-5** You can check the website on ```localhost:8080```  
+**Step-6** You can check the website on ```localhost:8080```  
   
 **Note** For hint you can see images in Readme_images in this repo.

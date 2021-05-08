@@ -29,6 +29,6 @@
     "port": "^0.8.1"
   },
   "devDependencies": {
-    "handlebars": "^4.7.6"
+    "handlebars": "^4.7.7"
   }
 }
